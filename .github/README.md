@@ -1,4 +1,8 @@
 # Contrast Security SAST Integration with Travis CI
+![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![travisci](https://img.shields.io/badge/-TravisCI-4e4847?style=flat-square&logo=travisci&logoColor=e0da53)
+![yaml](https://img.shields.io/badge/-YAML-black?style=flat-square&logo=yaml&logoColor=red)
+![Linux](https://img.shields.io/badge/-Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
 
 [Contrast Security](https://www.contrastsecurity.com/) provides a Static Application Security Testing (SAST) solution that can be integrated into your existing CI/CD pipeline for local, fast security scanning.
 
