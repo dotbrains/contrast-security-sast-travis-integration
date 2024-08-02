@@ -1,0 +1,44 @@
+sudo: required
+dist: focal
+group: beta
+language: generic
+
+services:
+  - docker
+
+branches:
+  only:
+    - development
+    - /^(main|master)$/
+    - /^\d+\.\d+(\.\d+)?(-\S*)?$/
+
+notifications:
+  email: false
+
+configs:
+  - &CONTRAST_CONFIG
+    - CONTRAST__API__API_KEY=${CONTRAST__API__API_KEY}
+    - CONTRAST__API__ORGANIZATION=${CONTRAST__API__ORGANIZATION}
+    - CONTRAST__API__SERVICE_KEY=${CONTRAST__API__SERVICE_KEY}
+    - CONTRAST__API__URL=${CONTRAST__API__URL}
+    - CONTRAST__API__USER_NAME=${CONTRAST__API__USER_NAME}
+    - CONTRAST_AGENT_VERSION=${CONTRAST_AGENT_VERSION}
+    - CONTRAST_PAT=${CONTRAST_PAT}
+    - CONTRAST__AUTH__TOKEN=${CONTRAST__AUTH__TOKEN}
+    - EMAIL_RECIPIENTS=${EMAIL_RECIPIENTS}
+
+stages:
+  - name: Static Code Analysis
+    if: type IN (pull_request, push) AND branch IN (development, master, main)
+
+jobs:
+  include:
+    - stage: Static Code Analysis
+      env:
+        - *CONTRAST_CONFIG
+      addons:
+        apt:
+          packages:
+            - mutt
+            - sendmail
+      script: bash contrast/contrast_sca.sh
